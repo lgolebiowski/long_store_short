@@ -21,12 +21,12 @@ const Logo = styled.h1`
   margin-left: 2rem;
   position: relative;
   z-index: 2;
-  transform: skew(-7deg);
+  transform: skew(0deg);
   a {
     padding: 0.5rem 1rem;
     background: ${props => props.theme.red};
     color: white;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     text-decoration: none;
   }
   @media (max-width: 1300px) {
@@ -42,7 +42,7 @@ const StyledHeader = styled.header`
     grid-template-columns: auto 1fr;
     justify-content: space-between;
     align-items: stretch;
-    @media (max-width: 1300px) {
+    @media (max-width: 1200px) {
       grid-template-columns: 1fr;
       justify-content: center;
     }
@@ -59,7 +59,7 @@ const Header = () => (
     <div className="bar">
       <Logo>
         <Link href="/">
-          <a>Sick Fits</a>
+          <a>masujkule</a>
         </Link>
       </Logo>
       <Nav />
