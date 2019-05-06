@@ -56,6 +56,9 @@ class UpdateItem extends Component {
 
   addFile = async (e) => {
     debugger;
+    this.setState({
+      addFileLoading: true
+    })
     const files = e.target.files;
     const data = new FormData();
     data.append('file', files[0]);
@@ -70,6 +73,7 @@ class UpdateItem extends Component {
     this.setState({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url,
+      addFileLoading: false,
     })
   }
 
@@ -167,7 +171,11 @@ class UpdateItem extends Component {
                   onChange={this.addFile}
                 />
               </label>
-              <button type="submit">Submit</button>
+              <button 
+                disabled={this.state.loading}
+                type="submit">
+                  Submit
+                </button>
             </fieldset>
           </Form>
         )}
