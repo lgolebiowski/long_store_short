@@ -31,7 +31,7 @@ export default class Item extends Component {
         <PriceTag>{item.price}</PriceTag>
         <p>{item.description}</p>
 
-        {/* <div className="buttonList">
+        <div className="buttonList">
           <Link
             href={{
               pathname: 'update',
@@ -40,9 +40,9 @@ export default class Item extends Component {
           >
             <a>Edit ✏️</a>
           </Link>
-          <AddToCart id={item.id} />
-          <DeleteItem id={item.id}>Delete This Item</DeleteItem>
-        </div> */}
+          {/* <AddToCart id={item.id} /> */}
+          {/* <DeleteItem id={item.id}>Delete This Item</DeleteItem> */}
+        </div>
       </ItemStyles>
     );
   }

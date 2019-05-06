@@ -23,7 +23,7 @@ const CREATE_ITEM_MUTATION = gql`
   }
 `;
 
-export default class CreateItem extends Component {
+class CreateItem extends Component {
 
   state = { 
     title: 'Nike',
@@ -41,6 +41,44 @@ export default class CreateItem extends Component {
     })
   }
 
+  addFile = async (e) => {
+    debugger;
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'long_store');
+    const res = await fetch(
+      'https://api.cloudinary.com/v1_1/deby1avwi/image/upload',
+      { method: 'POST', body: data }
+    )
+    
+    const file = await res.json();
+    console.log(file);
+    this.setState({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url,
+    })
+  }
+
+  // addFile = async e => {
+  //   const files = e.target.files;
+  //   const data = new FormData();
+  //   data.append('file', files[0]);
+  //   data.append('upload_preset', 'long_store');
+
+  //   const res = await fetch('https://api.cloudinary.com/v1_1/deby1avwi/image/upload', 
+  //   {
+  //     method: 'POST',
+  //     body: data,
+  //   });
+  //   const file = await res.json();
+  //   this.setState({
+  //     image: file.secure_url,
+  //     largeImage: file.eager[0].secure_url,
+  //   });
+  // };
+
+  
   render() {
     return (
       <Mutation mutation={ CREATE_ITEM_MUTATION } variables={ this.state }>
@@ -92,6 +130,16 @@ export default class CreateItem extends Component {
                 onChange={this.handleChange}
               />
             </label>
+            <label htmlFor="uploadFile">
+              Upload
+              <input
+                type="file"
+                name="file"
+                placeholder="upload file"
+                required
+                onChange={this.addFile}
+              />
+            </label>
             <button type="submit">Submit</button>
           </fieldset>
         </Form>
@@ -100,3 +148,6 @@ export default class CreateItem extends Component {
     )
   }
 }
+
+export default CreateItem;
+export { CREATE_ITEM_MUTATION };
