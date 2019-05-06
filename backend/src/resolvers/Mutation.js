@@ -15,13 +15,20 @@ const Mutation = {
 
     return item;
   },
-  // createDog(parent, args, ctx, info) {
-  //   global.dogs = global.dogs || [];
-  //   // create a dog
-  //   const newDog = { name: args.name };
-  //   global.dogs.push(newDog);
-  //   return newDog;
-  // },
+
+  async updateItem(parent, args, context, info) {
+    // make a copy of the args
+    const updates = {...args};
+    // the id won't be updated - remove it 
+    delete updates.id
+    // call update
+    return context.db.mutation.updateItem({
+      data: updates,
+      where: {
+        id: args.id,
+      }
+    })
+  }
 };
 
 module.exports = Mutation;
