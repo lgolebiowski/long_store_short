@@ -10,15 +10,28 @@ type Mutation {
   ): Item!
 
   updateItem(
+    id: ID!
     title: String, 
     description: String, 
     price: Int, 
     image: String, 
     largeImage: String
   ): Item!
+
+  deleteItem(
+    id: ID!
+  ): Item!
+
+  signUp(
+    name: String!,
+    email: String!,
+    password: String!
+  ): User!
+
 }
 
 type Query {
-  items: [Item]!
+  items(skip: Int, first: Int): [Item]!
   item(where: ItemWhereUniqueInput!): Item
+  itemsConnection(where: ItemWhereInput): ItemConnection!
 }
