@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Router from 'next/router';
 import { Mutation } from 'react-apollo';
 import Form from './styles/Form';
 import gql from 'graphql-tag'
@@ -39,7 +40,7 @@ class CreateItem extends Component {
     this.setState({
       [name]: val,
     })
-  }
+  };
 
   addFile = async (e) => {
     debugger;
@@ -51,14 +52,15 @@ class CreateItem extends Component {
       'https://api.cloudinary.com/v1_1/deby1avwi/image/upload',
       { method: 'POST', body: data }
     )
-    
+
     const file = await res.json();
-    console.log(file);
     this.setState({
       image: file.secure_url,
       largeImage: file.eager[0].secure_url,
-    })
-  }
+    },
+    () => console.log(this.state)
+    )
+  };
 
   // addFile = async e => {
   //   const files = e.target.files;
@@ -80,6 +82,7 @@ class CreateItem extends Component {
 
   
   render() {
+    console.log(this.state)
     return (
       <Mutation 
         mutation={ CREATE_ITEM_MUTATION } 
@@ -92,11 +95,11 @@ class CreateItem extends Component {
           // call the mutation
           const res = await createItem();
           // change them to the single item page
-          // console.log(res);
-          // Router.push({
-          //   pathname: '/item',
-          //   query: { id: res.data.createItem.id },
-          // });
+          console.log(res);
+          Router.push({
+            pathname: '/item',
+            query: { id: res.data.createItem.id },
+          });
         }}>
           <fieldset disabled={loading} aria-busy={loading}>
             Create a new Item

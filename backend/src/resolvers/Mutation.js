@@ -47,13 +47,12 @@ const Mutation = {
     );
   },
 
-  async signUp(parent, args, ctx, info) {
-    // lowercase their email
+  async signUp(parent, args, context, info) {
+    console.log(args)
     args.email = args.email.toLowerCase();
-    // hash their password
     const password = await bcrypt.hash(args.password, 10);
-    // create the user in the database
-    const user = await ctx.db.mutation.createUser(
+
+    const user = await context.db.mutation.createUser(
       {
         data: {
           ...args,
@@ -63,14 +62,13 @@ const Mutation = {
       },
       info
     );
-    // create the JWT token for them
+
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
-    // We set the jwt as a cookie on the response
-    ctx.response.cookie('token', token, {
+
+    context.response.cookie('token', token, {
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
+      maxAge: 1000 * 60 * 60 * 24 * 100 // 100 days
     });
-    // Finalllllly we return the user to the browser
     return user;
   }
 }
