@@ -1,0 +1,64 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "react-hooks"
+  ],
+  "rules": {
+    "react/jsx-wrap-multilines": 0,
+    "react/static-property-placement": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/sort-comp": 0,
+    "react/jsx-curly-newline": 0,
+    // allow prop spredding for styled-systems args to work
+    "react/jsx-props-no-spreading":  0,
+    "react/jsx-one-expression-per-line": 0,
+    // enforce Dangling Commas for Multiline Statements
+    "no-console": "off",
+     "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".test.js",
+          ".jsx"
+        ]
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ]
+  },
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "globals": {
+    "React:": true,
+    "shallow": true,
+    "render": true,
+    "mount": true,
+    "renderer": true
+  },
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended"
+  ],
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "16.3"
+    },
+    "import/resolver": "webpack"
+  }
+}

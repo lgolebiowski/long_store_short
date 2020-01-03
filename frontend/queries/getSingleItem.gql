@@ -1,0 +1,9 @@
+query GetSingleItem($id: ID!) {
+  item(where: { id: $id }) {
+    id
+    title
+    description
+    price
+    largeImage
+  }
+}

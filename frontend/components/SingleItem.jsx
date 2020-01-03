@@ -1,21 +1,10 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo';
+import Queries from '../queries'
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import styled from 'styled-components';
 
-
-const SINGLE_ITEM_QUERY = gql`
-query SINGLE_ITEM_QUERY($id: ID!) {
-  item(where: { id: $id }) {
-    id
-    title
-    description
-    price
-    largeImage
-  }
-}
-`;
 
 const SingleItemStyles = styled.div`
   max-width: 1200px;
@@ -42,14 +31,14 @@ export default class SingleItem extends Component {
   render() {
     return (
       <Query
-        query={SINGLE_ITEM_QUERY}
+        query={Queries.GetSingleItem}
         variables={{
           id: this.props.id,
         }}
       >
         {({ data, loading }) => {
           const { item } = data;
-          if(loading) {return <p>Loading...</p>}
+          if (loading) {return <p>Loading...</p>}
           console.log(data);
           return (
             <SingleItemStyles>

@@ -27,11 +27,19 @@ type Mutation {
     email: String!,
     password: String!
   ): User!
-
 }
 
 type Query {
-  items(skip: Int, first: Int): [Item]!
-  item(where: ItemWhereUniqueInput!): Item
-  itemsConnection(where: ItemWhereInput): ItemConnection!
+  items(
+    skip: Int,
+    first: Int
+  ): [Item]!
+
+  item(
+    where: ItemWhereUniqueInput!
+  ): Item
+
+  itemsConnection(
+    where: ItemWhereInput
+  ): ItemConnection!
 }
